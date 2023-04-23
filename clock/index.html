@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="refresh" content="86400">
+	<title>Joe Clock</title>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@600&family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+	<style>
+		:root {
+			font-size: 17.5vw;
+		}
+		
+		body {
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: #000;
+		}
+		
+		#clock {
+			font-family: 'Azeret Mono', monospace;
+			color: #ccc;
+		}
+		
+		.clock-colon {
+			font-family: 'Oswald', sans-serif;
+			font-size: 0.85rem;
+			padding: 0 0.05rem;
+			position: relative;
+			bottom: 0.03rem;
+			
+			font-size: 0.9rem;
+			padding: 0 0.07rem;
+			bottom: 0.00rem;
+		}
+		
+		.powering-up {
+			font-size: 0.4rem;
+		}
+		
+	</style>
+</head>
+
+<body>
+	
+	<div id="clock"><span class='powering-up'>Powering up...</span></div>
+	
+	<script>
+		setInterval(showTime, 1000);
+		function showTime() {
+			let time = new Date();
+			let hour = time.getHours();
+			let min = time.getMinutes();
+			let sec = time.getSeconds();
+			
+			sec = sec < 10 ? "0" + sec : sec;
+			min = min < 10 ? "0" + min : min;
+			if (hour > 12) {
+				hour -= 12;
+			}
+			if (hour == 0) {
+				hr = 12;
+			}
+			
+			let colon = "<span class='clock-colon'>:</span>";
+			let currentTime = hour + colon + min + colon + sec;
+			document.getElementById("clock").innerHTML = currentTime;
+		}
+	</script>
+
+</body>
+
+</html>
