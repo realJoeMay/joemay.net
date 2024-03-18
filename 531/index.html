@@ -96,19 +96,20 @@
 </head>
 <body>
 
-  <h1>5/3/1 Calculator</h1>
+  <div class="main">
 
-  <div class="inputs">
-      <label for="max-squat">Squat</label>
-      <input id="max-squat" name="squat" type="number" inputmode="numeric" min="5" max="1000" step="5" value="315">
-      <label for="max-bench">Bench</label>
-      <input id="max-bench" name="bench" type="number" inputmode="numeric" min="5" max="1000" step="5" value="225">
-      <label for="max-deadlift">Deadlift</label>
-      <input id="max-deadlift" name="deadlift" type="number" inputmode="numeric" min="5" max="1000" step="5" value="405">
-      <label for="max-press">Press</label>
-      <input id="max-press" name="press" type="number" inputmode="numeric" min="5" max="1000" step="5" value="135">
-    </div>
+	  <h1>5/3/1 Calculator</h1>
 
+	  <div class="inputs">
+	    <label for="max-squat">Squat</label>
+	    <input id="max-squat" name="squat" type="number" inputmode="numeric" min="5" max="1000" step="5" value="315">
+	    <label for="max-bench">Bench</label>
+	    <input id="max-bench" name="bench" type="number" inputmode="numeric" min="5" max="1000" step="5" value="225">
+	    <label for="max-deadlift">Deadlift</label>
+	    <input id="max-deadlift" name="deadlift" type="number" inputmode="numeric" min="5" max="1000" step="5" value="405">
+	    <label for="max-press">Press</label>
+	    <input id="max-press" name="press" type="number" inputmode="numeric" min="5" max="1000" step="5" value="135">
+	  </div>
 
     <div class="weeks">
 
@@ -325,14 +326,27 @@
 
     </div><!-- weeks -->
 
+  </div><!-- main -->
+
+
 <script>
-maxLiftInput("squat").addEventListener("input", updatePlan);
-maxLiftInput("bench").addEventListener("input", updatePlan);
-maxLiftInput("deadlift").addEventListener("input", updatePlan);
-maxLiftInput("press").addEventListener("input", updatePlan);
-prefillInputs();
-updatePlan();
-maxLiftInput("squat").select();
+  maxLiftInput("squat").addEventListener("input", updatePlan);
+  maxLiftInput("bench").addEventListener("input", updatePlan);
+  maxLiftInput("deadlift").addEventListener("input", updatePlan);
+  maxLiftInput("press").addEventListener("input", updatePlan);
+
+  // Keyboard Shortcuts
+  document.addEventListener("keydown", function(e) {
+    // Press c to copy shortcut url
+    if (e.code === "KeyC") {
+    	navigator.clipboard.writeText(`joemay.net/531?maxSquat=${maxLiftNumber("squat")}&maxBench=${maxLiftNumber("bench")}&maxDeadlift=${maxLiftNumber("deadlift")}&maxPress=${maxLiftNumber("press")}`);
+    }
+  });
+
+  prefillInputs();
+  updatePlan();
+  maxLiftInput("squat").select();
+
 </script>
 </body>
 </html>
