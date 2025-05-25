@@ -1,0 +1,386 @@
+/* Fonts */
+
+.noto-sans-jmf {
+  font-family: "Noto Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+  
+
+/* CLEANUP */
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #eee;
+    height: 100vh;
+    margin: 0;
+}
+
+h1, p {
+    margin: 0;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+/* TITLE BAR */
+
+header {
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
+    padding: 0 20px;
+}
+
+.header-content {
+    height: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-content h1 {
+    font-size: 24px;
+}
+
+
+/* SELECT PAGE */
+
+#select-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px
+}
+
+.select-buttons {
+    margin: 6vh 20px 0;
+    max-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 12px;    
+}
+
+.select-buttons button,
+#start-custom-btn,
+#retry-btn {
+    min-width: 150px;
+    min-height: 100px;
+    padding: 20px;
+    background-color: white;
+    border: none;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+    font-size: 26px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-buttons svg {
+    height: 32px;
+    fill: #333;
+}
+
+.select-buttons button:hover,
+#start-custom-btn:hover,
+#retry-btn:hover {
+    background-color: #ccc;
+}
+
+#start-all-btn {
+    display: grid;
+    grid-template-rows: 20px 20px;
+    grid-template-columns: 20px 20px;
+    gap: 6px;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+}
+
+#start-all-btn svg {
+    height: 23px;
+}
+
+
+/* SELECT CUSTOM */
+
+#hover-display {
+    min-height: 20px;
+}
+
+#select-custom {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-tables {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    max-width: 700px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.custom-tables h2 {
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px auto;
+}
+
+th, td {
+    border: 1px solid #000;
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    color: #444;
+    font-size: 16px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.header-cell {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #146EBEcc;
+    color: white;
+}
+
+.start-custom-error {
+    color: red;
+}
+
+
+/* QUIZ PAGE */
+
+#quiz-page {
+    display: none;
+    margin: 0 auto;
+    padding: 0;
+    flex-direction: column;
+    max-width: 800px;
+    min-height: calc(100vh - 50px);
+    justify-content: space-between;
+}
+
+
+/* PROBLEM CARD */
+
+.problem-card-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.problem-card {
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: fit-content;
+    font-size: 8rem;
+    display: grid;
+    grid-template-areas:
+        "n1 n1"
+        "op n2"
+        "eq eq"
+        "an an";
+    justify-content: center;
+    justify-items: end;
+}
+
+.problem-card * {
+    line-height: 1;
+}
+
+.problem-card .number {
+    text-align: right;
+}
+
+#number1 {
+    grid-area: n1;
+}
+
+#number2 {
+    grid-area: n2;
+    min-width: 7rem;
+}
+
+.operator {
+    grid-area: op;
+    margin: 0 0.5rem;
+    justify-self: center;
+}
+
+.operator svg {
+    height: 4rem;
+}
+
+.equals-line {
+    grid-area: eq;
+    height: 5px;
+    width: 100%;
+    background-color: black;
+    border-radius: 3px;
+}
+
+#feedback {
+    display: none;
+    grid-area: fb;
+    justify-self: start;
+}
+
+#feedback svg {
+    height: 30px;
+}
+
+#answer-display {
+    grid-area: an;
+    height: 9rem; 
+    text-align: right;
+}
+
+
+/* NUMBER BUTTONS */
+
+.number-btns {
+    margin: 0 5px 5px;
+    display: grid;
+    grid-template-areas:
+        "b1 b2 b3 b4 b5 b6"
+        "b7 b8 b9 b0 bc bc";
+    gap: 5px;
+}
+
+.number-btns button {
+    font-size: 1.5rem;
+    background-color: #aaa;
+    border: none;
+    color: white;
+    font-weight: 600;
+    height: 3rem;
+}
+
+.number-btns button:hover {
+    background-color: #888;
+}
+
+
+.number-btn[data-number="1"] {grid-area: b1;}
+.number-btn[data-number="2"] {grid-area: b2;}
+.number-btn[data-number="3"] {grid-area: b3;}
+.number-btn[data-number="4"] {grid-area: b4;}
+.number-btn[data-number="5"] {grid-area: b5;}
+.number-btn[data-number="6"] {grid-area: b6;}
+.number-btn[data-number="7"] {grid-area: b7;}
+.number-btn[data-number="8"] {grid-area: b8;}
+.number-btn[data-number="9"] {grid-area: b9;}
+.number-btn[data-number="0"] {grid-area: b0;}
+#clear-btn {grid-area: bc;}
+
+
+@media only screen and (min-width: 800px) {
+    #quiz-page {
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 40px;
+    }
+
+    .problem-card-wrap {
+        flex-grow: 0;
+    }
+
+    .problem-card {
+        margin: 0;
+    }
+
+    .number-btns {
+        margin: 0 5px;
+        grid-template-areas:
+        "b7 b8 b9"
+        "b4 b5 b6"
+        "b1 b2 b3"
+        "b0 bc bc";
+        grid-auto-columns: 5rem;
+        grid-auto-rows: 5rem;
+        align-content: center;
+    }
+
+    .number-btns button {
+        height: auto;
+    }
+
+}
+
+@media screen and (min-width: 800px) and (min-height: 800px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+    html {
+        font-size: 22px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* CONGRATS PAGE */
+
+#congrats-page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#congrats-page h2 {
+    margin-top: 5vh;
+    font-size: 24px;
+}
+
+#congrats-page img {
+    width: 500px;
+    max-width: 90%;
+}
+
+#retry-btn {
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}

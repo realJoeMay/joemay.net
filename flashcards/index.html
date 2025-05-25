@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMFlashcards</title>
+    <link href="./style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body class="noto-sans-jmf">
+    <div class="menu"></div>
+
+    <div class="page">
+
+        <header class="title-bar">
+            <div class="header-content">
+                <h1>JMFlashcards</h1>
+                <p id="feedback"></p>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <div id="select-page">
+                <div class="select-buttons">
+                    <button id="start-addition-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg></button>
+                    <button id="start-subtraction-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg></button>
+                    <button id="start-multiplication-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></button>
+                    <button id="start-division-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M272 96a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 320a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM400 288c17.7 0 32-14.3 32-32s-14.3-32-32-32L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l352 0z"/></svg></button>
+                    <button id="start-all-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M272 96a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 320a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM400 288c17.7 0 32-14.3 32-32s-14.3-32-32-32L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l352 0z"/></svg>
+                    </button>
+                    <button id="custom-btn">Custom</button>
+                </div>
+                <div id="select-custom">
+                    <div class="custom-tables">
+                        <div class="addition-table">
+                            <h2 id="addition-title">Addition</h2>
+                            <table id="addition-table"></table>
+                        </div>
+                        <div class="subtraction-table">
+                            <h2 id="subtraction-title">Subtraction</h2>
+                            <table id="subtraction-table"></table>
+                        </div>
+                        <div class="multiplication-table">
+                            <h2 id="multiplication-title">Multiplication</h2>
+                            <table id="multiplication-table"></table>
+                        </div>
+                        <div class="division-table">
+                            <h2 id="division-title">Division</h2>
+                            <table id="division-table"></table>
+                        </div>
+
+                    </div>
+                    <p class="start-custom-error"></p>
+                    <button id="start-custom-btn">Start Custom Quiz</button>
+                    
+                </div>
+            </div><!-- select page -->
+
+
+
+            <div id="quiz-page">
+                <div class="problem-card-wrap">
+                    <div class="problem-card">
+                        <div class="number" id="number1"></div>
+                        <div class="operator">+</div>
+                        <div class="number" id="number2"></div>
+                        <div class="equals-line"></div>
+                        
+                        <div class="number" id="answer-display"></div>
+                    </div>
+                </div>
+                <div class="number-btns">
+                    <button class="number-btn" data-number="1">1</button>
+                    <button class="number-btn" data-number="2">2</button>
+                    <button class="number-btn" data-number="3">3</button>
+                    <button class="number-btn" data-number="4">4</button>
+                    <button class="number-btn" data-number="5">5</button>
+                    <button class="number-btn" data-number="6">6</button>
+                    <button class="number-btn" data-number="7">7</button>
+                    <button class="number-btn" data-number="8">8</button>
+                    <button class="number-btn" data-number="9">9</button>
+                    <button class="number-btn" data-number="0">0</button>
+                    <button id="clear-btn">Clear</button>
+                </div>
+            </div><!-- quiz page -->
+
+
+
+            <div id="congrats-page">
+                <h2>Well done, the math dog is happy!</h2>
+                <!-- <p>You finished the quiz!</p> -->
+                <img src="./dog.jpg" alt="Dog">
+
+                <button id="retry-btn">Start Over</button>
+            </div><!-- congrats page -->
+
+
+
+        </div><!-- content -->
+
+
+    </div><!-- page -->
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
