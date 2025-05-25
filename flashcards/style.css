@@ -29,6 +29,7 @@ h1, p {
 
 button {
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 
