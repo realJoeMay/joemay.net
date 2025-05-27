@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>JMFlashcards</title>
     <link href="./style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -16,8 +17,14 @@
 
         <header class="title-bar">
             <div class="header-content">
-                <h1>JMFlashcards</h1>
-                <p id="feedback"></p>
+                <h1 id="header-title">JMFlashcards</h1>
+                <div id="quiz-progress">
+                    <div class="quiz-progress-content">
+                        <span id="progress-num">0</span>
+                        <span id="progress-slash">/</span>
+                        <span id="progress-den">0</span>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -66,13 +73,13 @@
 
 
             <div id="quiz-page">
+
                 <div class="problem-card-wrap">
                     <div class="problem-card">
                         <div class="number" id="number1"></div>
                         <div class="operator">+</div>
                         <div class="number" id="number2"></div>
                         <div class="equals-line"></div>
-                        
                         <div class="number" id="answer-display"></div>
                     </div>
                 </div>
@@ -88,7 +95,8 @@
                     <button class="number-btn" data-number="9">9</button>
                     <button class="number-btn" data-number="0">0</button>
                     <button id="clear-btn">Clear</button>
-                </div>
+                </div>    
+
             </div><!-- quiz page -->
 
 

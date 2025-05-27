@@ -33,6 +33,40 @@ button {
 }
 
 
+/* PAGES */
+
+#select-page,
+#quiz-page,
+#congrats-page,
+#quiz-progress,
+#header-title {
+    display: none;
+}
+
+.active-page-select #select-page,
+.active-page-quiz #quiz-page,
+.active-page-congrats #congrats-page {
+    display: flex;
+}
+
+.active-page-select #header-title,
+.active-page-congrats #header-title {
+    display: block;
+}
+
+.active-page-quiz #quiz-progress {
+    display: flex;
+}
+
+.active-page-quiz .title-bar {
+    padding: 0;
+}
+
+.active-page-quiz .header-content {
+    max-width: none;
+}
+
+
 /* TITLE BAR */
 
 header {
@@ -56,10 +90,24 @@ header {
 }
 
 
+/* PROGRESS BAR */
+
+#quiz-progress {
+    width: 100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;    
+}
+
+.quiz-progress-content {
+    font-size: 24px;
+    color: #666;
+}
+
+
 /* SELECT PAGE */
 
 #select-page {
-    display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 50px
@@ -181,12 +229,11 @@ th {
 /* QUIZ PAGE */
 
 #quiz-page {
-    display: none;
+    flex-direction: column;
+    min-height: calc(100vh - 50px);
     margin: 0 auto;
     padding: 0;
-    flex-direction: column;
     max-width: 800px;
-    min-height: calc(100vh - 50px);
     justify-content: space-between;
 }
 
@@ -364,7 +411,6 @@ th {
 /* CONGRATS PAGE */
 
 #congrats-page {
-    display: none;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -378,6 +424,8 @@ th {
 #congrats-page img {
     width: 500px;
     max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
 }
 
 #retry-btn {

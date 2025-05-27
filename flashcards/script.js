@@ -3,9 +3,37 @@ let currentQuestionIndex = 0;
 let currentAnswer = '';
 let isFeedbackVisible = false;
 
-const selectPage = document.getElementById('select-page');
-const quizPage = document.getElementById('quiz-page');
-const congratsPage = document.getElementById('congrats-page');
+const body = document.querySelector('body');
+const pageSelect = document.getElementById('select-page');
+const pageQuiz = document.getElementById('quiz-page');
+const pageCongrats = document.getElementById('congrats-page');
+
+
+// Page transitions
+function loadPageSelect() {
+    clearPage();
+    body.classList.add('active-page-select');
+}
+
+function loadPageQuiz() {
+    clearPage();
+    body.classList.add('active-page-quiz');
+}
+
+function loadPageCongrats() {
+    clearPage();
+    body.classList.add('active-page-congrats');
+}
+
+function clearPage() {
+    body.classList.remove('active-page-select');
+    body.classList.remove('active-page-quiz');
+    body.classList.remove('active-page-congrats');
+}
+
+loadPageSelect();
+
+
 
 
 function generateTable(tableId, operation) {
@@ -149,7 +177,7 @@ generateTable('division-table', 'division');
 const startCustomError = document.querySelector('.start-custom-error');
 function startQuiz() {
     questions = [];
-    selectedCells = selectPage.querySelectorAll('td.selected');
+    selectedCells = pageSelect.querySelectorAll('td.selected');
     selectedCells.forEach(cell => {
         questions.push({ num1: cell.dataset.n1, num2: cell.dataset.n2, answer: cell.dataset.answer, operation: cell.dataset.operation, digits: cell.dataset.digits})
     })
@@ -169,9 +197,9 @@ function startQuiz() {
     currentQuestionIndex = 0;
     currentAnswer = '';
     isFeedbackVisible = false;
-    selectPage.style.display = 'none';
     customTables.style.display = 'none';
-    quizPage.style.display = 'flex';
+    loadPageQuiz();
+    document.getElementById('progress-den').textContent = questions.length;
     loadQuestion();
 }
 
@@ -237,20 +265,23 @@ const number1Element = document.getElementById('number1');
 const number2Element = document.getElementById('number2');
 const operatorElement = document.querySelector('.operator');
 const answerDisplay = document.getElementById('answer-display');
-const feedback = document.getElementById('feedback');
+// const feedback = document.getElementById('feedback');
 const numberButtons = document.querySelectorAll('.number-btn');
 const clearButton = document.getElementById('clear-btn');
 const retryButton = document.getElementById('retry-btn');
 
+const progressBar = document.getElementById('quiz-progress');
+
+
 
 function loadQuestion() {
+    
     const question = questions[currentQuestionIndex];
     number1Element.textContent = question.num1;
     number2Element.textContent = question.num2;
     answerDisplay.style.width = question.digits * 5 + 'rem';
     currentAnswer = '';
     answerDisplay.textContent = '';
-    feedback.style.display = 'none';
     isFeedbackVisible = false;
 
     if (question.operation === 'addition') {
@@ -262,6 +293,11 @@ function loadQuestion() {
     } else if (question.operation === 'division') {
         operatorElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M272 96a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 320a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM400 288c17.7 0 32-14.3 32-32s-14.3-32-32-32L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l352 0z"/></svg>';
     }
+
+    percentDone = currentQuestionIndex / questions.length * 100;
+    console.log(percentDone);
+    progressBar.style.backgroundImage = `linear-gradient(to right, #146EBE88, #146EBE88 ${percentDone}%, white ${percentDone}%, white)`;
+    document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
 }
 
 
@@ -278,8 +314,7 @@ function checkAnswer() {
             if (currentQuestionIndex < questions.length) {
                 loadQuestion();
             } else {
-                quizPage.style.display = 'none';
-                congratsPage.style.display = 'flex';
+                loadPageCongrats(); 
             }
         }, 1000);
     } else if (currentAnswer.length === correctAnswer.length) {
@@ -289,7 +324,7 @@ function checkAnswer() {
             answerDisplay.style.color = "black";
             currentAnswer = '';
             answerDisplay.textContent = '';
-            feedback.style.display = 'none';
+            // feedback.style.display = 'none';
             isFeedbackVisible = false;
         }, 1000);
     }
@@ -317,8 +352,7 @@ clearButton.addEventListener('click', () => {
 
 
 retryButton.addEventListener('click', () => {
-    selectPage.style.display = 'flex';
-    congratsPage.style.display = 'none';
+    loadPageSelect();
 });
 
 
