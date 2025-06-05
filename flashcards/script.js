@@ -291,7 +291,7 @@ function loadQuestion() {
 
     percentDone = currentQuestionIndex / questions.length * 100;
     console.log(percentDone);
-    progressBar.style.backgroundImage = `linear-gradient(to right, #146EBE66, #146EBE66 ${percentDone}%, #fff ${percentDone}%, #fff)`;
+    progressBar.style.backgroundImage = `linear-gradient(to right, transparent, transparent ${percentDone}%, #fff ${percentDone}%, #fff)`;
     document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
 }
 
