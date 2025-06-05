@@ -363,34 +363,3 @@ document.addEventListener('keydown', (event) => {
         answerDisplay.textContent = currentAnswer;
     }
 });
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to determine if the device is touch-enabled
-    function isTouchDevice() {
-        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
-    }
-
-    if (isTouchDevice()) {
-        // Listen for touchend events on the entire document
-        document.addEventListener('touchend', function(e) {
-            
-            // Simulate a mouse unclick by dispatching a 'mouseup' event
-            let mouseUpEvent = new MouseEvent('mouseup', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
-            
-            // Dispatch the mouseup event on the target of the touch event
-            e.target.dispatchEvent(mouseUpEvent);
-            
-            // Optionally, blur the active element to clear focus
-            if (document.activeElement && document.activeElement !== document.body) {
-                document.activeElement.blur();
-            }
-        });
-    }
-});
