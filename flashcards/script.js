@@ -98,7 +98,6 @@ function generateTable(tableId, operation) {
                 td.dataset.n1 = row;
                 td.dataset.n2 = col;
                 td.dataset.answer = row + col;
-                // td.dataset.digits = countDigits(td.dataset.answer);
                 td.dataset.operation = 'addition';
                 td.dataset.display = `${row} + ${col} = ${row + col}`;
                 td.textContent = row + col;
@@ -106,7 +105,6 @@ function generateTable(tableId, operation) {
                 td.dataset.n1 = row + col
                 td.dataset.n2 = row
                 td.dataset.answer = col
-                // td.dataset.digits = countDigits(td.dataset.answer);
                 td.dataset.operation = 'subtraction'
                 td.dataset.display = `${row + col} - ${row} = ${col}` 
                 td.textContent = row + col
@@ -114,7 +112,6 @@ function generateTable(tableId, operation) {
                 td.dataset.n1 = row
                 td.dataset.n2 = col
                 td.dataset.answer = row * col
-                // td.dataset.digits = countDigits(td.dataset.answer);
                 td.dataset.operation = 'multiplication'
                 td.dataset.display = `${row} x ${col} = ${row * col}` 
                 td.textContent = row * col
@@ -122,7 +119,6 @@ function generateTable(tableId, operation) {
                 td.dataset.n1 = row * col
                 td.dataset.n2 = row
                 td.dataset.answer = col
-                
                 td.dataset.operation = 'division'
                 td.dataset.display = `${row * col} / ${row} = ${col}` 
                 td.textContent = row * col
@@ -265,7 +261,6 @@ const number1Element = document.getElementById('number1');
 const number2Element = document.getElementById('number2');
 const operatorElement = document.querySelector('.operator');
 const answerDisplay = document.getElementById('answer-display');
-// const feedback = document.getElementById('feedback');
 const numberButtons = document.querySelectorAll('.number-btn');
 const clearButton = document.getElementById('clear-btn');
 const retryButton = document.getElementById('retry-btn');
@@ -296,7 +291,7 @@ function loadQuestion() {
 
     percentDone = currentQuestionIndex / questions.length * 100;
     console.log(percentDone);
-    progressBar.style.backgroundImage = `linear-gradient(to right, #146EBE88, #146EBE88 ${percentDone}%, white ${percentDone}%, white)`;
+    progressBar.style.backgroundImage = `linear-gradient(to right, #146EBE66, #146EBE66 ${percentDone}%, #fff ${percentDone}%, #fff)`;
     document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
 }
 
@@ -324,7 +319,6 @@ function checkAnswer() {
             answerDisplay.style.color = "black";
             currentAnswer = '';
             answerDisplay.textContent = '';
-            // feedback.style.display = 'none';
             isFeedbackVisible = false;
         }, 1000);
     }
@@ -367,5 +361,36 @@ document.addEventListener('keydown', (event) => {
     } else if (event.key === 'Backspace') {
         currentAnswer = '';
         answerDisplay.textContent = currentAnswer;
+    }
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to determine if the device is touch-enabled
+    function isTouchDevice() {
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+    }
+
+    if (isTouchDevice()) {
+        // Listen for touchend events on the entire document
+        document.addEventListener('touchend', function(e) {
+            
+            // Simulate a mouse unclick by dispatching a 'mouseup' event
+            let mouseUpEvent = new MouseEvent('mouseup', {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            
+            // Dispatch the mouseup event on the target of the touch event
+            e.target.dispatchEvent(mouseUpEvent);
+            
+            // Optionally, blur the active element to clear focus
+            if (document.activeElement && document.activeElement !== document.body) {
+                document.activeElement.blur();
+            }
+        });
     }
 });

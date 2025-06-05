@@ -122,32 +122,31 @@ header {
     gap: 16px 12px;    
 }
 
-.select-buttons button,
-#start-custom-btn,
-#retry-btn {
+.select-buttons button, #start-custom-btn, #retry-btn {
     min-width: 150px;
     min-height: 100px;
     padding: 20px;
     background-color: white;
     border: none;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.09);
     border-radius: 5px;
     font-size: 26px;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+.select-buttons button:hover, 
+#start-custom-btn:hover, 
+#retry-btn:hover {
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
 .select-buttons svg {
     height: 32px;
     fill: #333;
-}
-
-.select-buttons button:hover,
-#start-custom-btn:hover,
-#retry-btn:hover {
-    background-color: #ccc;
 }
 
 #start-all-btn {
@@ -432,4 +431,5 @@ th {
     margin-top: 30px;
     padding-left: 50px;
     padding-right: 50px;
+    margin-bottom: 60px;
 }
