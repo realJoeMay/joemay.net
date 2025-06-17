@@ -171,6 +171,9 @@ generateTable('division-table', 'division');
 
 
 const startCustomError = document.querySelector('.start-custom-error');
+// const progressBarCurrent = document.querySelector('.progress-bar-current');
+const progressBar = document.querySelector('.progress-bar-done');
+
 function startQuiz() {
     questions = [];
     selectedCells = pageSelect.querySelectorAll('td.selected');
@@ -196,6 +199,8 @@ function startQuiz() {
     customTables.style.display = 'none';
     loadPageQuiz();
     document.getElementById('progress-den').textContent = questions.length;
+    // progressBarCurrent.style.width = `${100 / questions.length}%`;
+    progressBar.style.width = 0;
     loadQuestion();
 }
 
@@ -265,8 +270,7 @@ const numberButtons = document.querySelectorAll('.number-btn');
 const clearButton = document.getElementById('clear-btn');
 const retryButton = document.getElementById('retry-btn');
 
-const progressBar = document.getElementById('quiz-progress');
-
+// const progressBar = document.getElementById('quiz-progress');
 
 
 function loadQuestion() {
@@ -277,7 +281,7 @@ function loadQuestion() {
     answerDisplay.style.width = question.digits * 5 + 'rem';
     currentAnswer = '';
     answerDisplay.textContent = '';
-    isFeedbackVisible = false;
+    document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
 
     if (question.operation === 'addition') {
         operatorElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>';
@@ -289,10 +293,6 @@ function loadQuestion() {
         operatorElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M272 96a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 320a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM400 288c17.7 0 32-14.3 32-32s-14.3-32-32-32L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l352 0z"/></svg>';
     }
 
-    percentDone = currentQuestionIndex / questions.length * 100;
-    console.log(percentDone);
-    progressBar.style.backgroundImage = `linear-gradient(to right, transparent, transparent ${percentDone}%, #fff ${percentDone}%, #fff)`;
-    document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
 }
 
 
@@ -303,15 +303,22 @@ function checkAnswer() {
     if (currentAnswer === correctAnswer) {
         answerDisplay.style.color = "green";
         isFeedbackVisible = true;
+
+        currentQuestionIndex++;
+        percentDone = currentQuestionIndex / questions.length * 100;
+        progressBar.style.width = `${percentDone}%`;    
+        
+
         setTimeout(() => {
             answerDisplay.style.color = "black";
-            currentQuestionIndex++;
+            isFeedbackVisible = false;
             if (currentQuestionIndex < questions.length) {
                 loadQuestion();
             } else {
                 loadPageCongrats(); 
             }
         }, 1000);
+
     } else if (currentAnswer.length === correctAnswer.length) {
         answerDisplay.style.color = "red";
         isFeedbackVisible = true;
