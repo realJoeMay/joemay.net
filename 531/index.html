@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>E1RM Calculator</title>
+  <title>531 Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="icon" type="image/x-icon" href="../favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,14 @@
       max-width: 50px;
     }
 
-    .week {
+    .weeks {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-items: center;
+    }
+
+    /* .week {
       display: flex;
       column-gap: 10px;
       padding: 10px;
@@ -67,7 +74,7 @@
       font-weight: 600;
       display: flex;
       justify-content: stretch;
-    }
+    } */
 
     .sets {
       display: grid;
@@ -101,24 +108,16 @@
 	  <h1>5/3/1 Calculator</h1>
 
 	  <div class="inputs">
-	    <label for="max-squat">Squat</label>
+	    <label for="max-squat">Training Max</label>
 	    <input id="max-squat" name="squat" type="number" inputmode="numeric" min="5" max="1000" step="5" value="315">
-	    <label for="max-bench">Bench</label>
-	    <input id="max-bench" name="bench" type="number" inputmode="numeric" min="5" max="1000" step="5" value="225">
-	    <label for="max-deadlift">Deadlift</label>
-	    <input id="max-deadlift" name="deadlift" type="number" inputmode="numeric" min="5" max="1000" step="5" value="405">
-	    <label for="max-press">Press</label>
-	    <input id="max-press" name="press" type="number" inputmode="numeric" min="5" max="1000" step="5" value="135">
 	  </div>
 
     <div class="weeks">
 
       <div class="week week-1">
-        <h2 class="week-title">W1</h2>
         <div class="lifts">
-
           <div class="lift lift-squat">
-            <div class="header">Squat</div>
+            <h3 class="header">Week 1</h3>
             <div class="sets">
               <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
               <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
@@ -127,54 +126,17 @@
               <span class="reps">5</span><span class="x">×</span><span class="set-5 weight"></span>
               <span class="reps">5+</span><span class="x">×</span><span class="set-6 weight"></span>
             </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-bench">
-            <div class="header">Bench</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">5+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-deadlift">
-            <div class="header">Deadlift</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">5+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-press">
-            <div class="header">Press</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">5+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
+          </div>
 
         </div><!-- lifts -->
       </div><!-- week -->
 
 
       <div class="week week-2">
-        <h2 class="week-title">W2</h2>
         <div class="lifts">
 
           <div class="lift lift-squat">
-            <div class="header">Squat</div>
+            <h3 class="header">Week 2</h3>
             <div class="sets">
               <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
               <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
@@ -183,54 +145,17 @@
               <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
               <span class="reps">3+</span><span class="x">×</span><span class="set-6 weight"></span>
             </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-bench">
-            <div class="header">Bench</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">3+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-deadlift">
-            <div class="header">Deadlift</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">3+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-press">
-            <div class="header">Press</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">3+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
+          </div>
 
         </div><!-- lifts -->
       </div><!-- week -->
 
 
       <div class="week week-3">
-        <h2 class="week-title">W3</h2>
         <div class="lifts">
 
           <div class="lift lift-squat">
-            <div class="header">Squat</div>
+            <h3 class="header">Week 3</h3>
             <div class="sets">
               <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
               <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
@@ -239,87 +164,23 @@
               <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
               <span class="reps">1+</span><span class="x">×</span><span class="set-6 weight"></span>
             </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-bench">
-            <div class="header">Bench</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">1+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-deadlift">
-            <div class="header">Deadlift</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">1+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-press">
-            <div class="header">Press</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-3 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-4 weight"></span>
-              <span class="reps">3</span><span class="x">×</span><span class="set-5 weight"></span>
-              <span class="reps">1+</span><span class="x">×</span><span class="set-6 weight"></span>
-            </div>
-          </div><!-- lift -->
+          </div>
 
         </div><!-- lifts -->
       </div><!-- week -->
 
 
       <div class="week week-4">
-        <h2 class="week-title">W4</h2>
         <div class="lifts">
 
           <div class="lift lift-squat">
-            <div class="header">Squat</div>
+            <h3 class="header">Week 4</h3>
             <div class="sets">
               <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
               <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
               <span class="reps">5</span><span class="x">×</span><span class="set-3 weight"></span>
             </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-bench">
-            <div class="header">Bench</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-3 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-deadlift">
-            <div class="header">Deadlift</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-3 weight"></span>
-            </div>
-          </div><!-- lift -->
-
-          <div class="lift lift-press">
-            <div class="header">Press</div>
-            <div class="sets">
-              <span class="reps">5</span><span class="x">×</span><span class="set-1 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-2 weight"></span>
-              <span class="reps">5</span><span class="x">×</span><span class="set-3 weight"></span>
-            </div>
-          </div><!-- lift -->
+          </div>
 
         </div><!-- lifts -->
       </div><!-- week -->
@@ -331,9 +192,9 @@
 
 <script>
   maxLiftInput("squat").addEventListener("input", updatePlan);
-  maxLiftInput("bench").addEventListener("input", updatePlan);
-  maxLiftInput("deadlift").addEventListener("input", updatePlan);
-  maxLiftInput("press").addEventListener("input", updatePlan);
+  // maxLiftInput("bench").addEventListener("input", updatePlan);
+  // maxLiftInput("deadlift").addEventListener("input", updatePlan);
+  // maxLiftInput("press").addEventListener("input", updatePlan);
 
   // Keyboard Shortcuts
   document.addEventListener("keydown", function(e) {

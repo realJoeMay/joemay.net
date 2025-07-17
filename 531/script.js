@@ -1,6 +1,6 @@
 function updateLift(lift) {
 	// maxInput = maxLiftInput(lift);
-	max = maxLiftNumber(lift);
+	max = maxLiftNumber(lift) / 0.9;
 	liftClass = ".lift-" + lift;
 
 	if (isNaN(max)) {
@@ -44,9 +44,9 @@ function maxLiftInput(lift) {
 
 function updatePlan() {
 	updateLift("squat");
-	updateLift("bench");
-	updateLift("deadlift");
-	updateLift("press");
+	// updateLift("bench");
+	// updateLift("deadlift");
+	// updateLift("press");
 }
 
 function prefillInputs() {
@@ -54,13 +54,13 @@ function prefillInputs() {
 	if (params.has('maxSquat')) {
 		maxLiftInput('squat').value = params.get('maxSquat');
 	}
-	if (params.has('maxDeadlift')) {
-		maxLiftInput('deadlift').value = params.get('maxDeadlift');
-	}
-	if (params.has('maxBench')) {
-		maxLiftInput('bench').value = params.get('maxBench');
-	}
-	if (params.has('maxPress')) {
-		maxLiftInput('press').value = params.get('maxPress');
-	}
+	// if (params.has('maxDeadlift')) {
+	// 	maxLiftInput('deadlift').value = params.get('maxDeadlift');
+	// }
+	// if (params.has('maxBench')) {
+	// 	maxLiftInput('bench').value = params.get('maxBench');
+	// }
+	// if (params.has('maxPress')) {
+	// 	maxLiftInput('press').value = params.get('maxPress');
+	// }
 }
