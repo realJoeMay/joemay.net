@@ -252,12 +252,40 @@ startAllButton.addEventListener('click', function () {
 });
 
 customButton.addEventListener('click', () => {
+    // deselect all problem cells 
+    allCells.forEach(cell => cell.classList.remove('selected'));
+
     customTables.style.display = 'flex';
 });
 
 startCustomButton.addEventListener('click', () => {
     startQuiz();
 });
+
+function startDemo() {
+    // Deselect all problem cells
+    allCells.forEach(cell => cell.classList.remove('selected'));
+
+    // Helper to get one random cell from a NodeList
+    const getRandomCell = (cells) => {
+        const arr = Array.from(cells);
+        return arr[Math.floor(Math.random() * arr.length)];
+    };
+
+    // Pick one from each operation
+    const chosenCells = [
+        getRandomCell(additionCells),
+        getRandomCell(subtractionCells),
+        getRandomCell(multiplicationCells),
+        getRandomCell(divisionCells)
+    ];
+
+    // Mark chosen cells as selected
+    chosenCells.forEach(cell => cell.classList.add('selected'));
+
+    // Start the quiz
+    startQuiz();
+}
 
 
 
@@ -357,6 +385,25 @@ retryButton.addEventListener('click', () => {
 });
 
 
+// start demo from touchscreen long press
+let pressTimer;
+
+document.addEventListener('touchstart', () => {
+    if (!document.body.classList.contains('active-page-select')) return;
+
+    pressTimer = setTimeout(() => {
+        startDemo();
+    }, 1500); // 1.5 second hold
+});
+
+document.addEventListener('touchend', () => {
+    clearTimeout(pressTimer);
+});
+
+
+
+
+
 document.addEventListener('keydown', (event) => {
     if (isFeedbackVisible) return;
 
@@ -365,8 +412,24 @@ document.addEventListener('keydown', (event) => {
         currentAnswer += event.key;
         answerDisplay.textContent = currentAnswer;
         checkAnswer();
+
     } else if (event.key === 'Backspace') {
         currentAnswer = '';
         answerDisplay.textContent = currentAnswer;
+
+    } else if (event.key.toLowerCase() === 'd' && document.body.classList.contains('active-page-select')) {
+        startDemo();
     }
+});
+
+
+
+function set_vh() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+set_vh();
+
+window.addEventListener('resize', () => {
+  set_vh();
 });

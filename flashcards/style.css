@@ -66,6 +66,10 @@ button {
     max-width: none;
 }
 
+body.active-page-quiz {
+    overflow: hidden;
+}
+
 
 /* TITLE BAR */
 
@@ -252,7 +256,8 @@ th {
 
 #quiz-page {
     flex-direction: column;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 50px); /* Fallback for browsers that do not support Custom Properties */
+    min-height: calc(var(--vh, 1vh) * 100 - 50px);
     margin: 0 auto;
     padding: 0;
     max-width: 800px;
