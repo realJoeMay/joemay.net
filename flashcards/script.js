@@ -198,6 +198,7 @@ function startQuiz() {
     isFeedbackVisible = false;
     customTables.style.display = 'none';
     loadPageQuiz();
+    window.scrollTo();
     document.getElementById('progress-den').textContent = questions.length;
     // progressBarCurrent.style.width = `${100 / questions.length}%`;
     progressBar.style.width = 0;
