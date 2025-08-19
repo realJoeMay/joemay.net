@@ -3,44 +3,73 @@ let currentQuestionIndex = 0;
 let currentAnswer = '';
 let isFeedbackVisible = false;
 
-const body = document.querySelector('body');
-const pageSelect = document.getElementById('select-page');
-const pageQuiz = document.getElementById('quiz-page');
-const pageCongrats = document.getElementById('congrats-page');
+const body = document.body;
+const pageSelect = document.querySelector('.select-page');
 
+const startAdditionButton = document.getElementById('start-addition-btn');
+const startSubtractionButton = document.getElementById('start-subtraction-btn');
+const startMultiplicationButton = document.getElementById('start-multiplication-btn');
+const startDivisionButton = document.getElementById('start-division-btn');
+const startAllButton = document.getElementById('start-all-btn');
+const customButton = document.getElementById('custom-btn');
+const customTables = document.getElementById('select-custom');
+const startCustomButton = document.getElementById('start-custom-btn');
+const startCustomError = document.querySelector('.start-custom-error');
 
-// Page transitions
-function loadPageSelect() {
-    clearPage();
-    body.classList.add('active-page-select');
+const progressBar = document.querySelector('.progress-bar-done');
+const number1Element = document.getElementById('number1');
+const number2Element = document.getElementById('number2');
+const operatorElement = document.querySelector('.operator');
+const answerDisplay = document.getElementById('answer-display');
+const numberButtons = document.querySelectorAll('.number-btn');
+const clearButton = document.getElementById('clear-btn');
+const retryButton = document.getElementById('retry-btn');
+
+// -------------------
+// Utility functions
+// -------------------
+
+function loadPage(page) {
+    body.classList.remove('active-page-select', 'active-page-quiz', 'active-page-congrats');
+    body.classList.add(`active-page-${page}`);
+
+    if (page === 'select') {
+        progressBar.style.width = 0;
+    }
 }
 
-function loadPageQuiz() {
-    clearPage();
-    body.classList.add('active-page-quiz');
+function selectCells(cells) {
+    // const oCells = getOperationCells();
+    operationCells().all.forEach(cell => cell.classList.remove('selected'));
+    cells.forEach(cell => cell.classList.add('selected'));
 }
 
-function loadPageCongrats() {
-    clearPage();
-    body.classList.add('active-page-congrats');
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
-function clearPage() {
-    body.classList.remove('active-page-select');
-    body.classList.remove('active-page-quiz');
-    body.classList.remove('active-page-congrats');
+function updateProgress() {
+    const percentDone = (currentQuestionIndex / questions.length) * 100;
+    progressBar.style.width = `${percentDone}%`;
 }
 
-loadPageSelect();
+function countDigits(num) {
+    if (num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
 
-
-
+// -------------------
+// Table generation
+// -------------------
 
 function generateTable(tableId, operation) {
     const table = document.getElementById(tableId);
     const tbody = document.createElement('tbody');
     const tableCells = [];
-    const max = 10
+    const max = 10;
 
     // Create table header
     const thead = document.createElement('thead');
@@ -49,7 +78,7 @@ function generateTable(tableId, operation) {
     cornerCell.className = 'header-cell';
     headerRow.appendChild(cornerCell);
 
-    let start_row = 0
+    let start_row = 0;
     if (operation === 'division') start_row = 1;
 
     for (let i = 0; i <= max; i++) {
@@ -60,11 +89,7 @@ function generateTable(tableId, operation) {
             const columnCells = tableCells[i];
             const allSelected = columnCells.every(cell => cell.classList.contains('selected'));
             columnCells.forEach(cell => {
-                if (allSelected) {
-                    cell.classList.remove('selected');
-                } else {
-                    cell.classList.add('selected');
-                }
+                cell.classList.toggle('selected', !allSelected);
             });
         });
         headerRow.appendChild(th);
@@ -82,18 +107,15 @@ function generateTable(tableId, operation) {
         th.addEventListener('click', function () {
             const allSelected = rowCells.every(cell => cell.classList.contains('selected'));
             rowCells.forEach(cell => {
-                if (allSelected) {
-                    cell.classList.remove('selected');
-                } else {
-                    cell.classList.add('selected');
-                }
+                cell.classList.toggle('selected', !allSelected);
             });
         });
         tr.appendChild(th);
 
         for (let col = 0; col <= max; col++) {
             const td = document.createElement('td');
-            td.className = 'selected'
+            td.className = 'selected';
+
             if (operation === 'addition') {
                 td.dataset.n1 = row;
                 td.dataset.n2 = col;
@@ -102,32 +124,33 @@ function generateTable(tableId, operation) {
                 td.dataset.display = `${row} + ${col} = ${row + col}`;
                 td.textContent = row + col;
             } else if (operation === 'subtraction') {
-                td.dataset.n1 = row + col
-                td.dataset.n2 = row
-                td.dataset.answer = col
-                td.dataset.operation = 'subtraction'
-                td.dataset.display = `${row + col} - ${row} = ${col}` 
-                td.textContent = row + col
+                td.dataset.n1 = row + col;
+                td.dataset.n2 = row;
+                td.dataset.answer = col;
+                td.dataset.operation = 'subtraction';
+                td.dataset.display = `${row + col} - ${row} = ${col}`;
+                td.textContent = row + col;
             } else if (operation === 'multiplication') {
-                td.dataset.n1 = row
-                td.dataset.n2 = col
-                td.dataset.answer = row * col
-                td.dataset.operation = 'multiplication'
-                td.dataset.display = `${row} x ${col} = ${row * col}` 
-                td.textContent = row * col
+                td.dataset.n1 = row;
+                td.dataset.n2 = col;
+                td.dataset.answer = row * col;
+                td.dataset.operation = 'multiplication';
+                td.dataset.display = `${row} x ${col} = ${row * col}`;
+                td.textContent = row * col;
             } else if (operation === 'division') {
-                td.dataset.n1 = row * col
-                td.dataset.n2 = row
-                td.dataset.answer = col
-                td.dataset.operation = 'division'
-                td.dataset.display = `${row * col} / ${row} = ${col}` 
-                td.textContent = row * col
+                td.dataset.n1 = row * col;
+                td.dataset.n2 = row;
+                td.dataset.answer = col;
+                td.dataset.operation = 'division';
+                td.dataset.display = `${row * col} / ${row} = ${col}`;
+                td.textContent = row * col;
             }
-            td.dataset.digits = countDigits(td.dataset.answer);
 
+            td.dataset.digits = countDigits(td.dataset.answer);
             td.addEventListener('click', function () {
                 this.classList.toggle('selected');
             });
+
             tr.appendChild(td);
             rowCells.push(td);
             if (!tableCells[col]) tableCells[col] = [];
@@ -143,174 +166,98 @@ function generateTable(tableId, operation) {
         const allCells = table.querySelectorAll('td');
         const allSelected = Array.from(allCells).every(cell => cell.classList.contains('selected'));
         allCells.forEach(cell => {
-            if (allSelected) {
-                cell.classList.remove('selected');
-            } else {
-                cell.classList.add('selected');
-            }
+            cell.classList.toggle('selected', !allSelected);
         });
     });
 }
 
-function countDigits(num) {
-    if (num === 0) {
-        return 1; 
-    }
-    
-    return Math.floor(Math.log10(Math.abs(num))) + 1;
-}
 
-// Generate tables
-generateTable('addition-table', 'addition');
-generateTable('subtraction-table', 'subtraction');
-generateTable('multiplication-table', 'multiplication');
-generateTable('division-table', 'division');
-
-
-
-
-
-const startCustomError = document.querySelector('.start-custom-error');
-// const progressBarCurrent = document.querySelector('.progress-bar-current');
-const progressBar = document.querySelector('.progress-bar-done');
+// -------------------
+// Quiz logic
+// -------------------
 
 function startQuiz() {
     questions = [];
-    selectedCells = pageSelect.querySelectorAll('td.selected');
+    const selectedCells = pageSelect.querySelectorAll('td.selected');
     selectedCells.forEach(cell => {
-        questions.push({ num1: cell.dataset.n1, num2: cell.dataset.n2, answer: cell.dataset.answer, operation: cell.dataset.operation, digits: cell.dataset.digits})
-    })
+        questions.push({
+            num1: cell.dataset.n1,
+            num2: cell.dataset.n2,
+            answer: cell.dataset.answer,
+            operation: cell.dataset.operation,
+            digits: cell.dataset.digits
+        });
+    });
 
     if (questions.length === 0) {
         startCustomError.textContent = 'Nice Try!';
-        return
+        return;
     }
     startCustomError.textContent = '';
 
-    // Shuffle the questions
-    for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
+    shuffle(questions);
 
     currentQuestionIndex = 0;
     currentAnswer = '';
     isFeedbackVisible = false;
+
     customTables.style.display = 'none';
-    loadPageQuiz();
-    window.scrollTo();
-    document.getElementById('progress-den').textContent = questions.length;
-    // progressBarCurrent.style.width = `${100 / questions.length}%`;
-    progressBar.style.width = 0;
+    loadPage('quiz');
+
+    document.querySelector('.progress-den').textContent = questions.length;
     loadQuestion();
 }
 
-
-
-
-const startAdditionButton = document.getElementById('start-addition-btn');
-const startSubtractionButton = document.getElementById('start-subtraction-btn');
-const startMultiplicationButton = document.getElementById('start-multiplication-btn');
-const startDivisionButton = document.getElementById('start-division-btn');
-const startAllButton = document.getElementById('start-all-btn');
-const customButton = document.getElementById('custom-btn');
-const customTables = document.getElementById('select-custom');
-
-const startCustomButton = document.getElementById('start-custom-btn');
-const additionCells = document.querySelectorAll('#addition-table td');
-const subtractionCells = document.querySelectorAll('#subtraction-table td');
-const multiplicationCells = document.querySelectorAll('#multiplication-table td');
-const divisionCells = document.querySelectorAll('#division-table td');
-const allCells = document.querySelectorAll('td');
-
-startAdditionButton.addEventListener('click', function () {
-    allCells.forEach(cell => cell.classList.remove('selected'));
-    additionCells.forEach(cell => cell.classList.add('selected'));
-    startQuiz();
-});
-
-startSubtractionButton.addEventListener('click', function () {
-    allCells.forEach(cell => cell.classList.remove('selected'));
-    subtractionCells.forEach(cell => cell.classList.add('selected'));
-    startQuiz();
-});
-
-startMultiplicationButton.addEventListener('click', function () {
-    allCells.forEach(cell => cell.classList.remove('selected'));
-    multiplicationCells.forEach(cell => cell.classList.add('selected'));
-    startQuiz();
-});
-
-startDivisionButton.addEventListener('click', function () {
-    allCells.forEach(cell => cell.classList.remove('selected'));
-    divisionCells.forEach(cell => cell.classList.add('selected'));
-    startQuiz();
-});
-
-startAllButton.addEventListener('click', function () {
-    allCells.forEach(cell => cell.classList.add('selected'));
-    startQuiz();
-});
-
-customButton.addEventListener('click', () => {
-    // deselect all problem cells 
-    allCells.forEach(cell => cell.classList.remove('selected'));
-
-    customTables.style.display = 'flex';
-});
-
-startCustomButton.addEventListener('click', () => {
-    startQuiz();
-});
-
-function startDemo() {
-    // Deselect all problem cells
-    allCells.forEach(cell => cell.classList.remove('selected'));
-
-    // Helper to get one random cell from a NodeList
-    const getRandomCell = (cells) => {
-        const arr = Array.from(cells);
-        return arr[Math.floor(Math.random() * arr.length)];
-    };
-
-    // Pick one from each operation
-    const chosenCells = [
-        getRandomCell(additionCells),
-        getRandomCell(subtractionCells),
-        getRandomCell(multiplicationCells),
-        getRandomCell(divisionCells)
+function operationCells() {
+    const addition = document.querySelectorAll('#addition-table td');
+    const subtraction = document.querySelectorAll('#subtraction-table td');
+    const multiplication = document.querySelectorAll('#multiplication-table td');
+    const division = document.querySelectorAll('#division-table td');
+    const all = [
+        ...addition,
+        ...subtraction,
+        ...multiplication,
+        ...division
     ];
-
-    // Mark chosen cells as selected
-    chosenCells.forEach(cell => cell.classList.add('selected'));
-
-    // Start the quiz
-    startQuiz();
+    return { addition, subtraction, multiplication, division, all };
 }
 
 
+function startDemo() {
+    selectCells([]); // clear selections
 
+    const cells = operationCells();
 
-const number1Element = document.getElementById('number1');
-const number2Element = document.getElementById('number2');
-const operatorElement = document.querySelector('.operator');
-const answerDisplay = document.getElementById('answer-display');
-const numberButtons = document.querySelectorAll('.number-btn');
-const clearButton = document.getElementById('clear-btn');
-const retryButton = document.getElementById('retry-btn');
+    const getRandomCell = nodelist => {
+        const arr = Array.from(nodelist);
+        return arr.length ? arr[Math.floor(Math.random() * arr.length)] : null;
+    };
 
-// const progressBar = document.getElementById('quiz-progress');
+    const chosenCells = [
+        getRandomCell(cells.addition),
+        getRandomCell(cells.subtraction),
+        getRandomCell(cells.multiplication),
+        getRandomCell(cells.division)
+    ].filter(Boolean);
+
+    chosenCells.forEach(cell => cell.classList.add('selected'));
+
+    if (chosenCells.length > 0) {
+        startQuiz();
+    } else {
+        console.warn("No cells available for demo");
+    }
+}
 
 
 function loadQuestion() {
-    
     const question = questions[currentQuestionIndex];
     number1Element.textContent = question.num1;
     number2Element.textContent = question.num2;
     answerDisplay.style.width = question.digits * 5 + 'rem';
     currentAnswer = '';
     answerDisplay.textContent = '';
-    document.getElementById('progress-num').textContent = currentQuestionIndex + 1;
+    document.querySelector('.progress-num').textContent = currentQuestionIndex + 1;
 
     if (question.operation === 'addition') {
         operatorElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>';
@@ -321,9 +268,7 @@ function loadQuestion() {
     } else if (question.operation === 'division') {
         operatorElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M272 96a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 320a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM400 288c17.7 0 32-14.3 32-32s-14.3-32-32-32L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l352 0z"/></svg>';
     }
-
 }
-
 
 function checkAnswer() {
     if (isFeedbackVisible) return;
@@ -334,9 +279,7 @@ function checkAnswer() {
         isFeedbackVisible = true;
 
         currentQuestionIndex++;
-        percentDone = currentQuestionIndex / questions.length * 100;
-        progressBar.style.width = `${percentDone}%`;    
-        
+        updateProgress();
 
         setTimeout(() => {
             answerDisplay.style.color = "black";
@@ -344,7 +287,7 @@ function checkAnswer() {
             if (currentQuestionIndex < questions.length) {
                 loadQuestion();
             } else {
-                loadPageCongrats(); 
+                loadPage('congrats');
             }
         }, 1000);
 
@@ -360,6 +303,41 @@ function checkAnswer() {
     }
 }
 
+// -------------------
+// Event bindings
+// -------------------
+
+startAdditionButton.addEventListener('click', () => {
+    selectCells(operationCells().addition);
+    startQuiz();
+});
+
+startSubtractionButton.addEventListener('click', () => {
+    selectCells(operationCells().subtraction);
+    startQuiz();
+});
+
+startMultiplicationButton.addEventListener('click', () => {
+    selectCells(operationCells().multiplication);
+    startQuiz();
+});
+
+startDivisionButton.addEventListener('click', () => {
+    selectCells(operationCells().division);
+    startQuiz();
+});
+
+startAllButton.addEventListener('click', () => {
+    operationCells().all.forEach(cell => cell.classList.add('selected'));
+    startQuiz();
+});
+
+customButton.addEventListener('click', () => {
+    selectCells([]);
+    customTables.style.display = 'flex';
+});
+
+startCustomButton.addEventListener('click', startQuiz);
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -372,39 +350,27 @@ numberButtons.forEach(button => {
     });
 });
 
-
 clearButton.addEventListener('click', () => {
     if (isFeedbackVisible) return;
-
     currentAnswer = '';
     answerDisplay.textContent = '';
 });
 
-
 retryButton.addEventListener('click', () => {
-    loadPageSelect();
+    loadPage('select');
 });
-
 
 // start demo from touchscreen long press
 let pressTimer;
-
 document.addEventListener('touchstart', () => {
     if (!document.body.classList.contains('active-page-select')) return;
-
     pressTimer = setTimeout(() => {
         startDemo();
-    }, 1500); // 1.5 second hold
+    }, 1500);
 });
+document.addEventListener('touchend', () => clearTimeout(pressTimer));
 
-document.addEventListener('touchend', () => {
-    clearTimeout(pressTimer);
-});
-
-
-
-
-
+// keyboard support
 document.addEventListener('keydown', (event) => {
     if (isFeedbackVisible) return;
 
@@ -413,24 +379,23 @@ document.addEventListener('keydown', (event) => {
         currentAnswer += event.key;
         answerDisplay.textContent = currentAnswer;
         checkAnswer();
-
     } else if (event.key === 'Backspace') {
         currentAnswer = '';
-        answerDisplay.textContent = currentAnswer;
-
+        answerDisplay.textContent = '';
     } else if (event.key.toLowerCase() === 'd' && document.body.classList.contains('active-page-select')) {
         startDemo();
     }
 });
 
+// Initialize  page
+loadPage('select');
+generateTable('addition-table', 'addition');
+generateTable('subtraction-table', 'subtraction');
+generateTable('multiplication-table', 'multiplication');
+generateTable('division-table', 'division');
 
-
-function set_vh() {
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-set_vh();
-
-window.addEventListener('resize', () => {
-  set_vh();
-});
+// const additionCells = document.querySelectorAll('#addition-table td');
+// const subtractionCells = document.querySelectorAll('#subtraction-table td');
+// const multiplicationCells = document.querySelectorAll('#multiplication-table td');
+// const divisionCells = document.querySelectorAll('#division-table td');
+// const allCells = document.querySelectorAll('td');
