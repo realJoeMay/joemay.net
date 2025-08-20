@@ -79,11 +79,32 @@ function loadPage(page) {
 
     if (page === 'select') {
         progressBar.style.width = 0;
+    } else if (page === 'congrats') {
+        updateStats();
     }
 }
 
+function updateStats() {
+    const totalQuestions = questions.length;
+    const totalMistakes = questions.reduce((sum, q) => sum + q.mistake, 0);
+    const totalCorrect = totalQuestions - totalMistakes;
+    const accuracy = totalQuestions > 0 
+        ? (totalCorrect / totalQuestions * 100).toFixed(0) 
+        : "0";
+
+    let message = "woof.";
+    if (accuracy >= 100) {
+        message = "Woof! Woof! Woof!";
+    } else if (accuracy >= 90) {
+        message = "Woof woof!";
+    }
+
+    document.querySelector(".congrats-questions").textContent = totalQuestions;
+    document.querySelector(".congrats-mistakes").textContent = totalMistakes;
+    document.querySelector(".congrats-message").textContent = message;
+}
+
 function selectCells(cells) {
-    // const oCells = getOperationCells();
     operationCells().all.forEach(cell => cell.classList.remove('selected'));
     cells.forEach(cell => cell.classList.add('selected'));
 }
@@ -246,7 +267,8 @@ function startQuiz() {
             num2: cell.dataset.n2,
             answer: cell.dataset.answer,
             operation: cell.dataset.operation,
-            digits: cell.dataset.digits
+            digits: cell.dataset.digits,
+            mistake: 0
         });
     });
 
@@ -274,12 +296,7 @@ function operationCells() {
     const subtraction = document.querySelectorAll('#subtraction-table td');
     const multiplication = document.querySelectorAll('#multiplication-table td');
     const division = document.querySelectorAll('#division-table td');
-    const all = [
-        ...addition,
-        ...subtraction,
-        ...multiplication,
-        ...division
-    ];
+    const all = [...addition, ...subtraction, ...multiplication, ...division];
     return { addition, subtraction, multiplication, division, all };
 }
 
@@ -326,33 +343,42 @@ function checkAnswer() {
 
     const correctAnswer = questions[currentQuestionIndex].answer;
     if (currentAnswer === correctAnswer) {
-        answerDisplay.style.color = "green";
-        isFeedbackVisible = true;
-
-        currentQuestionIndex++;
-        updateProgress();
-
-        setTimeout(() => {
-            answerDisplay.style.color = "black";
-            isFeedbackVisible = false;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                loadPage('congrats');
-            }
-        }, 1000);
-
+        answerCorrect();
     } else if (currentAnswer.length === correctAnswer.length) {
-        answerDisplay.style.color = "red";
-        isFeedbackVisible = true;
-        setTimeout(() => {
-            answerDisplay.style.color = "black";
-            currentAnswer = '';
-            answerDisplay.textContent = '';
-            isFeedbackVisible = false;
-        }, 1000);
+        answerIncorrect();
     }
 }
+
+function answerCorrect() {
+    answerDisplay.style.color = "green";
+    isFeedbackVisible = true;
+
+    currentQuestionIndex++;
+    updateProgress();
+
+    setTimeout(() => {
+        answerDisplay.style.color = "black";
+        isFeedbackVisible = false;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            loadPage('congrats');
+        }
+    }, 1000);
+}
+
+function answerIncorrect() {
+    questions[currentQuestionIndex].mistake = 1;
+    answerDisplay.style.color = "red";
+    isFeedbackVisible = true;
+    setTimeout(() => {
+        answerDisplay.style.color = "black";
+        currentAnswer = '';
+        answerDisplay.textContent = '';
+        isFeedbackVisible = false;
+    }, 1000);
+}
+
 
 // -------------------
 // Event bindings

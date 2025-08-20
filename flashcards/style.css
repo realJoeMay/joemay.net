@@ -22,7 +22,7 @@ body {
     margin: 0;
 }
 
-h1, p {
+h1 {
     margin: 0;
 }
 
@@ -440,6 +440,7 @@ th {
 
 .congrats-page h2 {
     margin-top: 5vh;
+    margin-bottom: 0;
     font-size: 24px;
 }
 
