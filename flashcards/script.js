@@ -5,6 +5,7 @@ let isFeedbackVisible = false;
 
 const body = document.body;
 const pageSelect = document.querySelector('.select-page');
+const titleBar = document.querySelector('.title-bar');
 
 const startAdditionButton = document.getElementById('start-addition-btn');
 const startSubtractionButton = document.getElementById('start-subtraction-btn');
@@ -437,9 +438,9 @@ retryButton.addEventListener('click', () => {
     loadPage('select');
 });
 
-// start demo from touchscreen long press
+// start demo from touchscreen long press on title bar
 let pressTimer;
-document.addEventListener('touchstart', () => {
+titleBar.addEventListener('touchstart', () => {
     if (!document.body.classList.contains('active-page-select')) return;
     pressTimer = setTimeout(() => {
         startDemo();
