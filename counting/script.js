@@ -373,4 +373,6 @@ document.addEventListener('keydown', (event) => {
 
 // Initialize
 loadPage('select');
+maxBaseInput.value = 20;
+maxOffsetInput.value = 1;
 generateTable();
