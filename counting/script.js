@@ -298,11 +298,11 @@ function updateProgress() {
 // Event bindings
 // -------------------
 
-maxBaseInput.addEventListener('click', () => {
+maxBaseInput.addEventListener('input', () => {
     generateTable()
 });
 
-maxOffsetInput.addEventListener('click', () => {
+maxOffsetInput.addEventListener('input', () => {
     generateTable()
 });
 
