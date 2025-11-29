@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <title>JMCounting</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="../favicon.png">
@@ -32,19 +33,19 @@
             <h2>Practice counting!</h2>
             <span>Up to</span>
             <input id="max-base" type="number" min="5" max="100" step="5"/> 
-            <span>±</span>
-            <input id="max-offset" type="number" min="1" max="5" step="1"/>
+            <!-- <span>±</span>
+            <input id="max-offset" type="number" min="1" max="5" step="1"/> -->
         </div>
 
         <table id="problem-select-table"></table>
 
         <div class="start-btns">
-            <button id="start-20-btn">Start 20<br>questions</button>
-            <button id="start-40-btn">Start 40<br>questions</button>
-            <button id="start-60-btn">Start 60<br>questions</button>
-            <button id="start-80-btn">Start 80<br>questions</button>
-            <button id="start-100-btn">Start 100<br>questions</button>
-            <button id="start-all-btn">All<br>questions</button>
+            <button class="start-btn" id="start-20-btn">Start 20<br>questions</button>
+            <button class="start-btn" id="start-40-btn">Start 40<br>questions</button>
+            <button class="start-btn" id="start-60-btn">Start 60<br>questions</button>
+            <button class="start-btn" id="start-80-btn">Start 80<br>questions</button>
+            <button class="start-btn" id="start-100-btn">Start 100<br>questions</button>
+            <button class="start-btn" id="start-all-btn">All<br>questions</button>
         </div>
         
         <div class="start-error-message"></div>
@@ -53,8 +54,9 @@
     <div class="quiz-page">
         <div class="problem-card-wrap">
             <div class="problem-card">
-                <div class="prompt"></div>
-                <div class="answer"><span class="answer-text"></span></div>
+                <span class="prompt-before"></span>
+                <span class="answer"><span class="answer-text"></span></span>
+                <span class="prompt-after"></span>
             </div>
         </div>
         <div class="number-btns">

@@ -3,7 +3,7 @@ const pageSelect = document.querySelector('.select-page');
 const progressBar = document.querySelector('.progress-bar-done');
 
 const maxBaseInput = document.getElementById('max-base');
-const maxOffsetInput = document.getElementById('max-offset');
+// const maxOffsetInput = document.getElementById('max-offset');
 const start20Button = document.getElementById('start-20-btn');
 const start40Button = document.getElementById('start-40-btn');
 const start60Button = document.getElementById('start-60-btn');
@@ -12,7 +12,8 @@ const start100Button = document.getElementById('start-100-btn');
 const startAllButton = document.getElementById('start-all-btn');
 const startErrorMessage = document.querySelector('.start-error-message');
 
-const problemPrompt = document.querySelector('.problem-card .prompt');
+const problemPromptBefore = document.querySelector('.prompt-before');
+const problemPromptAfter = document.querySelector('.prompt-after');
 const answerDisplay = document.querySelector('.answer-text');
 const numberButtons = document.querySelectorAll('.number-btn');
 const clearButton = document.getElementById('clear-btn');
@@ -58,7 +59,8 @@ function countSelectedProblems() {
 }
 
 function updateStartButtons() {
-    const count = countSelectedProblems();
+    // const count = countSelectedProblems();
+    const count = parseInt(maxBaseInput.value, 10);
     startAllButton.innerHTML = `Start all ${count}<br>questions`;
 
     start20Button.style.display = 'none';
@@ -82,122 +84,122 @@ function updateStartButtons() {
 // Table generation
 // -------------------
 
-function generateTable() {
-    const table = document.getElementById('problem-select-table');
-    table.innerHTML = '';
-    const tbody = document.createElement('tbody');
-    const tableCells = [];
+// function generateTable() {
+    // const table = document.getElementById('problem-select-table');
+    // table.innerHTML = '';
+    // const tbody = document.createElement('tbody');
+    // const tableCells = [];
 
-    const max_base = parseInt(maxBaseInput.value, 10);
-    const max_offset = parseInt(maxOffsetInput.value, 10);
+    // const max_base = parseInt(maxBaseInput.value, 10);
+    // const max_offset = parseInt(maxOffsetInput.value, 10);
 
-    // Create table header
-    const thead = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    const cornerCell = document.createElement('th');
-    cornerCell.className = 'header-cell';
-    headerRow.appendChild(cornerCell);
+    // // Create table header
+    // const thead = document.createElement('thead');
+    // const headerRow = document.createElement('tr');
+    // const cornerCell = document.createElement('th');
+    // cornerCell.className = 'header-cell';
+    // headerRow.appendChild(cornerCell);
 
-    for (let col = 0; col < 2 * max_offset; col++) {
-        let offset = col - max_offset;
-        if (offset >= 0) offset += 1; 
+    // for (let col = 0; col < 2 * max_offset; col++) {
+    //     let offset = col - max_offset;
+    //     if (offset >= 0) offset += 1; 
 
-        const th = document.createElement('th');
-        th.textContent = offset;
-        th.textContent = offset.toString();
-        if (offset>0) {
-            th.textContent = '+' + offset.toString();
-        }
+    //     const th = document.createElement('th');
+    //     th.textContent = offset;
+    //     th.textContent = offset.toString();
+    //     if (offset>0) {
+    //         th.textContent = '+' + offset.toString();
+    //     }
 
-        th.className = 'header-cell';
-        th.addEventListener('click', function () {
-            const columnCells = tableCells[col];
-            const allSelected = columnCells.every(cell => cell.classList.contains('selected'));
-            columnCells.forEach(cell => {
-                cell.classList.toggle('selected', !allSelected);
-            });
-            updateStartButtons();
-        });        
-        headerRow.appendChild(th);
-    }
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-
-    // for each row
-    for (let base = 1; base <= max_base; base++) {
-        const tr = document.createElement('tr');
-        const rowCells = [];
-        const th = document.createElement('th');
-        th.textContent = base;
-        th.className = 'header-cell';
-
-        th.addEventListener('click', function () {
-            const allSelected = rowCells.every(cell => cell.classList.contains('selected'));
-            rowCells.forEach(cell => {
-                cell.classList.toggle('selected', !allSelected);
-            });
-            updateStartButtons();
-        });
-        tr.appendChild(th);
-
-        // for each column
-        for (let col = 0; col < 2 * max_offset; col++) {
-            let offset = col - max_offset;
-            if (offset >= 0) offset += 1; 
-
-            td = generateTableCell(base, offset, max_base);
-            tr.appendChild(td);
-
-            if (!tableCells[col]) tableCells[col] = [];
-            if (isValidProblem(base, offset, max_base)) {
-                rowCells.push(td);
-                tableCells[col].push(td);
-            }
-        }
-        tbody.appendChild(tr);
-    }
-    table.appendChild(tbody);
-
-    updateStartButtons();
-}
+    //     th.className = 'header-cell';
+    //     th.addEventListener('click', function () {
+    //         const columnCells = tableCells[col];
+    //         const allSelected = columnCells.every(cell => cell.classList.contains('selected'));
+    //         columnCells.forEach(cell => {
+    //             cell.classList.toggle('selected', !allSelected);
+    //         });
+    //         updateStartButtons();
+    //     });        
+    //     headerRow.appendChild(th);
+    // }
+    // thead.appendChild(headerRow);
+    // table.appendChild(thead);
 
 
-function generateTableCell(base, offset, max_base) {
-    const td = document.createElement('td');
+    // // for each row
+    // for (let base = 1; base <= max_base; base++) {
+    //     const tr = document.createElement('tr');
+    //     const rowCells = [];
+    //     const th = document.createElement('th');
+    //     th.textContent = base;
+    //     th.className = 'header-cell';
+
+    //     th.addEventListener('click', function () {
+    //         const allSelected = rowCells.every(cell => cell.classList.contains('selected'));
+    //         rowCells.forEach(cell => {
+    //             cell.classList.toggle('selected', !allSelected);
+    //         });
+    //         updateStartButtons();
+    //     });
+    //     tr.appendChild(th);
+
+    //     // for each column
+    //     for (let col = 0; col < 2 * max_offset; col++) {
+    //         let offset = col - max_offset;
+    //         if (offset >= 0) offset += 1; 
+
+    //         td = generateTableCell(base, offset, max_base);
+    //         tr.appendChild(td);
+
+    //         if (!tableCells[col]) tableCells[col] = [];
+    //         if (isValidProblem(base, offset, max_base)) {
+    //             rowCells.push(td);
+    //             tableCells[col].push(td);
+    //         }
+    //     }
+    //     tbody.appendChild(tr);
+    // }
+    // table.appendChild(tbody);
+
+//     updateStartButtons();
+// }
+
+
+// function generateTableCell(base, offset, max_base) {
+//     const td = document.createElement('td');
     
-    // check valid answer
-    if (!isValidProblem(base, offset, max_base)) {
-        return td;
-    }
+//     // check valid answer
+//     if (!isValidProblem(base, offset, max_base)) {
+//         return td;
+//     }
 
-    // set text
-    td.textContent = offset.toString();
-    if (offset > 0) {
-        td.textContent = '+' + offset.toString();
-    }
+//     // set text
+//     td.textContent = offset.toString();
+//     if (offset > 0) {
+//         td.textContent = '+' + offset.toString();
+//     }
 
-    // set dataset
-    td.dataset.base = base;
-    td.dataset.offset = offset;
-    td.dataset.answer = base + offset;
-    if (offset === 1) {
-        td.dataset.prompt = `What number is after ${base}?`;
-    } else if (offset > 0) {
-        td.dataset.prompt = `What number is ${offset} after ${base}?`;
-    } else if (offset === -1) {
-        td.dataset.prompt = `What number is before ${base}?`;
-    } else {
-        td.dataset.prompt = `What number is ${-offset} before ${base}?`;
-    }
+//     // set dataset
+//     td.dataset.base = base;
+//     td.dataset.offset = offset;
+//     td.dataset.answer = base + offset;
+//     if (offset === 1) {
+//         td.dataset.prompt = `What number is after ${base}?`;
+//     } else if (offset > 0) {
+//         td.dataset.prompt = `What number is ${offset} after ${base}?`;
+//     } else if (offset === -1) {
+//         td.dataset.prompt = `What number is before ${base}?`;
+//     } else {
+//         td.dataset.prompt = `What number is ${-offset} before ${base}?`;
+//     }
 
-    td.classList.add('problem', 'selected');
-    td.addEventListener('click', function () {
-        this.classList.toggle('selected');
-        updateStartButtons();
-    });
-    return td
-}
+//     td.classList.add('problem', 'selected');
+//     td.addEventListener('click', function () {
+//         this.classList.toggle('selected');
+//         updateStartButtons();
+//     });
+//     return td
+// }
 
 
 // -------------------
@@ -206,15 +208,19 @@ function generateTableCell(base, offset, max_base) {
 
 function startQuiz(problemCount) {
 
-    // load selected questions
+    const max = parseInt(maxBaseInput.value, 10);
+
+
+    // load questions
     questions = [];
-    const selectedCells = pageSelect.querySelectorAll('td.selected');
-    selectedCells.forEach(cell => {
+    for (let i = 1; i <= max; i++) {
         questions.push({
-            prompt: cell.dataset.prompt,
-            answer: cell.dataset.answer
+            answer: i.toString(),
+            digits: i.toString().length,
+            promptBefore: (i-1).toString(),
+            promptAfter: (i+1).toString()
         });
-    });
+    }
 
     if (questions.length === 0) {
         startErrorMessage.textContent = 'Nice Try!';
@@ -239,17 +245,22 @@ function startQuiz(problemCount) {
 
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
-    problemPrompt.innerHTML = question.prompt;
+    problemPromptBefore.innerHTML = question.promptBefore;
+    problemPromptAfter.innerHTML = question.promptAfter;
     currentAnswer = '';
     answerDisplay.textContent = '';
+    answerDisplay.style.width = `${question.digits * 1.8 + 0.7}rem`;
     document.querySelector('.progress-num').textContent = currentQuestionIndex + 1;
 }
 
 
 function checkAnswer() {
+    console.log('checking answer')
     if (isFeedbackVisible) return;
 
+    console.log('feedback not visible')
     const correctAnswer = questions[currentQuestionIndex].answer;
+    console.log(correctAnswer, currentAnswer)
     if (currentAnswer === correctAnswer) {
         answerCorrect();
     } else if (currentAnswer.length === correctAnswer.length) {
@@ -299,12 +310,14 @@ function updateProgress() {
 // -------------------
 
 maxBaseInput.addEventListener('input', () => {
-    generateTable()
+    // generateTable();
+    updateStartButtons();
 });
 
-maxOffsetInput.addEventListener('input', () => {
-    generateTable()
-});
+// maxOffsetInput.addEventListener('input', () => {
+//     // generateTable()
+//     updateStartButtons();
+// });
 
 start20Button.addEventListener('click', () => {
     startQuiz(20);
@@ -374,5 +387,6 @@ document.addEventListener('keydown', (event) => {
 // Initialize
 loadPage('select');
 maxBaseInput.value = 20;
-maxOffsetInput.value = 1;
-generateTable();
+// maxOffsetInput.value = 1;
+// generateTable();
+updateStartButtons();
