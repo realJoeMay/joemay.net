@@ -37,6 +37,7 @@ button {
 	box-sizing: border-box;
 }
 
+
 /* PAGES */
 
 body > * {
@@ -58,6 +59,11 @@ body > * {
 body.active-page-quiz {
     overflow: hidden;
 }
+
+
+
+
+
 
 
 /* TITLE BAR */
@@ -123,99 +129,22 @@ header {
     padding-bottom: 50px
 }
 
-.select-buttons {
-    margin: 6vh 20px 0;
-    max-width: 500px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px 12px;    
-}
-
-.select-buttons button, #start-custom-btn, #retry-btn {
-    min-width: 150px;
-    min-height: 100px;
-    padding: 20px;
-    background-color: white;
-    border: none;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.09);
-    border-radius: 5px;
-    font-size: 26px;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: box-shadow 0.2s;
-}
-
-@media (hover: hover) {
-    .select-buttons button:hover, 
-    #start-custom-btn:hover, 
-    #retry-btn:hover {
-        box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
-    }
-}
-.select-buttons svg {
-    height: 32px;
-    fill: #333;
-}
-
-#start-all-btn {
-    display: grid;
-    grid-template-rows: 20px 20px;
-    grid-template-columns: 20px 20px;
-    gap: 6px;
-    justify-content: center;
-    align-content: center;
-    justify-items: center;
-}
-
-#start-all-btn .sign-wrap {
-    display:flex;
-}
-
-#start-all-btn svg {
-    height: 23px;
-}
-
-
-/* SELECT CUSTOM */
-
-#hover-display {
-    min-height: 20px;
-}
-
-#select-custom {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-}
-
-.custom-tables {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 20px;
-    max-width: 700px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.custom-tables h2 {
-    margin-bottom: 0;
+.select-input-section {
     text-align: center;
-    font-size: 24px;
+}
+
+#problem-select-table {
+    display: none;
 }
 
 table {
     border-collapse: collapse;
     margin: 10px auto;
 }
-
 th, td {
     border: 1px solid #000;
     text-align: center;
-    width: 24px;
+    width: 30px;
     height: 24px;
     color: #444;
     font-size: 16px;
@@ -235,9 +164,19 @@ th {
     color: white;
 }
 
-.start-custom-error {
+.start-btns {
+    margin-top: 40px;
+    display: flex;
+    max-width: 500px;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    justify-content: center;
+}
+
+.start-error-message {
     color: red;
 }
+
 
 
 /* QUIZ PAGE */
@@ -245,22 +184,24 @@ th {
 .quiz-page {
     flex-direction: column;
     min-height: calc(100vh - 50px);
-    /* min-height: calc(var(--vh, 1vh) * 100 - 50px); */
     margin: 0 auto;
     padding: 0;
     max-width: 800px;
     justify-content: space-between;
+    position: relative;
+    top: 50px;
+
 }
 
 
 /* PROBLEM CARD */
 
 .problem-card-wrap {
-    position: relative;
-    top: -35px;
     flex-grow: 1;
     display: flex;
     align-items: center;
+    position: relative;
+    top: -60px;
 }
 
 .problem-card {
@@ -268,70 +209,30 @@ th {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
     border-radius: 10px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 1rem;
     width: fit-content;
-    font-size: 8rem;
-    display: grid;
-    grid-template-areas:
-        "n1 n1"
-        "op n2"
-        "eq eq"
-        "an an";
+    max-width: 80%;
+    font-size: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.problem-card .prompt {
+    max-width: 350px;
+}
+
+.problem-card .answer {
+    font-size: 4.4rem;
+    margin: 1rem;
+    background: #146EBE25;
+    border-bottom: 2px solid #777;
+    height: 5.4rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    justify-items: end;
 }
-
-.problem-card * {
-    line-height: 1;
-}
-
-.problem-card .number {
-    text-align: right;
-}
-
-#number1 {
-    grid-area: n1;
-}
-
-#number2 {
-    grid-area: n2;
-    min-width: 7rem;
-}
-
-.operator {
-    grid-area: op;
-    margin: 0 0.5rem;
-    justify-self: center;
-}
-
-.operator svg {
-    height: 4rem;
-}
-
-.equals-line {
-    grid-area: eq;
-    height: 5px;
-    width: 100%;
-    background-color: black;
-    border-radius: 3px;
-}
-
-#feedback {
-    display: none;
-    grid-area: fb;
-    justify-self: start;
-}
-
-#feedback svg {
-    height: 30px;
-}
-
-#answer-display {
-    grid-area: an;
-    height: 9rem; 
-    text-align: right;
-}
-
 
 /* NUMBER BUTTONS */
 
@@ -376,7 +277,7 @@ th {
 #clear-btn {grid-area: bc;}
 
 
-/* REPONSIVE */
+/* Wider screen */
 
 @media only screen and (min-width: 800px) {
     .quiz-page {
@@ -388,16 +289,17 @@ th {
     .problem-card-wrap {
         flex-grow: 0;
         position: relative;
-        top: 25px;
+        top: 0px;
     }
 
     .problem-card {
         margin: 0;
+        max-width: 100%;
     }
 
     .number-btns {
         position: relative;
-        top: 25px;
+        top: 0px;
         width: auto;
         height: auto;
         margin: 0 5px;
@@ -411,21 +313,25 @@ th {
         align-content: center;
     }
 
+    .quiz-page {
+        max-width: 1000px;
+    }
+
+
     .number-btns button {
         height: auto;
     }
-}
 
-@media screen and (min-width: 800px) and (min-height: 800px) {
-    body {
-        font-size: 18px;
-    }
 }
 
 @media screen and (min-width: 1000px) and (min-height: 1000px) {
     html {
         font-size: 22px;
     }
+    .problem-card .prompt {
+        max-width: 450px;
+    }
+
 }
 
 
@@ -450,17 +356,27 @@ th {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.09);
 }
 
+#start-20-btn, #start-40-btn, #start-60-btn, #start-80-btn, #start-100-btn, #start-all-btn, 
+#retry-btn {
+    min-width: 200px;
+    min-height: 120px;
+    padding: 10px;
+    background-color: white;
+    border: none;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+    font-size: 26px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.2s;
+}
+
+
 #retry-btn {
     margin-top: 30px;
     padding-left: 50px;
     padding-right: 50px;
     margin-bottom: 60px;
 }
-
-
-/* .element-to-center {
-    position: absolute;
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-} */

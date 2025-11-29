@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>JMCounting</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body class="noto-sans-jmf">
+
+    <header class="title-bar">
+        <div class="header-content">
+            <h1>JMCounting</h1>
+        </div>
+    </header>
+
+    <header class="quiz-progress">
+        <div class="progress-bar">
+            <div class="progress-bar-done"></div>
+        </div>
+        <div class="progress-text">
+            <span class="progress-num">0</span>/<span class="progress-den">0</span>
+        </div>
+    </header>
+
+    <div class="select-page">
+        <div class="select-input-section">
+            <h2>Practice counting!</h2>
+            <span>Up to</span>
+            <input id="max-base" type="number" min="5" max="100" step="5" value="10"/> 
+            <span>±</span>
+            <input id="max-offset" type="number" min="1" max="5" step="1" value="2"/>
+        </div>
+
+        <table id="problem-select-table"></table>
+
+        <div class="start-btns">
+            <button id="start-20-btn">Start 20<br>questions</button>
+            <button id="start-40-btn">Start 40<br>questions</button>
+            <button id="start-60-btn">Start 60<br>questions</button>
+            <button id="start-80-btn">Start 80<br>questions</button>
+            <button id="start-100-btn">Start 100<br>questions</button>
+            <button id="start-all-btn">All<br>questions</button>
+        </div>
+        
+        <div class="start-error-message"></div>
+    </div><!-- select page -->
+
+    <div class="quiz-page">
+        <div class="problem-card-wrap">
+            <div class="problem-card">
+                <div class="prompt"></div>
+                <div class="answer"><span class="answer-text"></span></div>
+            </div>
+        </div>
+        <div class="number-btns">
+            <button class="number-btn" data-number="1">1</button>
+            <button class="number-btn" data-number="2">2</button>
+            <button class="number-btn" data-number="3">3</button>
+            <button class="number-btn" data-number="4">4</button>
+            <button class="number-btn" data-number="5">5</button>
+            <button class="number-btn" data-number="6">6</button>
+            <button class="number-btn" data-number="7">7</button>
+            <button class="number-btn" data-number="8">8</button>
+            <button class="number-btn" data-number="9">9</button>
+            <button class="number-btn" data-number="0">0</button>
+            <button id="clear-btn">Clear</button>
+        </div>    
+    </div><!-- quiz page -->
+
+        <div class="congrats-page">
+        <h2>Well done!</h2>
+        <p>
+            The math dog says "Arf! Arf!"
+        </p>
+        <img src="dog.jpg" alt="Math Dog">
+        <button id="retry-btn">Start Over</button>
+    </div><!-- congrats page -->
+
+
+    <script src="script.js"></script>
+</body>
+</html>

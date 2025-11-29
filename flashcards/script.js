@@ -204,28 +204,24 @@ function generateTable(tableId, operation) {
                 td.dataset.n2 = col;
                 td.dataset.answer = row + col;
                 td.dataset.operation = 'addition';
-                // td.dataset.display = `${row} + ${col} = ${row + col}`;
                 td.textContent = row + col;
             } else if (operation === 'subtraction') {
                 td.dataset.n1 = row + col;
                 td.dataset.n2 = row;
                 td.dataset.answer = col;
                 td.dataset.operation = 'subtraction';
-                // td.dataset.display = `${row + col} - ${row} = ${col}`;
                 td.textContent = row + col;
             } else if (operation === 'multiplication') {
                 td.dataset.n1 = row;
                 td.dataset.n2 = col;
                 td.dataset.answer = row * col;
                 td.dataset.operation = 'multiplication';
-                // td.dataset.display = `${row} x ${col} = ${row * col}`;
                 td.textContent = row * col;
             } else if (operation === 'division') {
                 td.dataset.n1 = row * col;
                 td.dataset.n2 = row;
                 td.dataset.answer = col;
                 td.dataset.operation = 'division';
-                // td.dataset.display = `${row * col} / ${row} = ${col}`;
                 td.textContent = row * col;
             }
 
@@ -252,6 +248,8 @@ function generateTable(tableId, operation) {
             cell.classList.toggle('selected', !allSelected);
         });
     });
+
+    
 }
 
 
@@ -260,6 +258,8 @@ function generateTable(tableId, operation) {
 // -------------------
 
 function startQuiz() {
+
+    // load selected questions
     questions = [];
     const selectedCells = pageSelect.querySelectorAll('td.selected');
     selectedCells.forEach(cell => {
