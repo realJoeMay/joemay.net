@@ -235,7 +235,7 @@ th {
     bottom: 0;
     width: 100%;
     padding: 0 5px 5px;
-    margin-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
     display: grid;
     grid-template-areas:
         "b1 b2 b3 b4 b5 b6"
