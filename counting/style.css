@@ -183,13 +183,13 @@ th {
 
 .quiz-page {
     flex-direction: column;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh);
     margin: 0 auto;
     padding: 0;
     max-width: 800px;
     justify-content: space-between;
     position: relative;
-    top: 50px;
+    /* top: 50px; */
 
 }
 
