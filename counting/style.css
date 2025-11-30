@@ -234,14 +234,19 @@ th {
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 0 5px 5px;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 5px);
+    padding: 0 5px 5px;    
     display: grid;
     grid-template-areas:
         "b1 b2 b3 b4 b5 b6"
         "b7 b8 b9 b0 bc bc";
     gap: 5px;
     height: 120px;
+
+    /* Old Safari syntax */
+    padding-bottom: constant(safe-area-inset-bottom);
+    /* New Safari / modern syntax */
+    padding-bottom: env(safe-area-inset-bottom);
+
 }
 
 .number-btns button {
