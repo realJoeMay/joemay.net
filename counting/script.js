@@ -214,12 +214,22 @@ function startQuiz(problemCount) {
     // load questions
     questions = [];
     for (let i = 1; i <= max; i++) {
-        questions.push({
+
+        question = {
             answer: i.toString(),
             digits: i.toString().length,
             promptBefore: (i-1).toString(),
             promptAfter: (i+1).toString()
-        });
+        };
+
+        // random select before, after, or between
+        let randomNumber = Math.random();
+        if (randomNumber < 1/3) {
+            question.promptBefore = ''
+        } else if (randomNumber < 2/3) {
+            question.promptAfter = ''
+        }
+        questions.push(question);
     }
 
     if (questions.length === 0) {
