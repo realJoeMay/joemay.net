@@ -249,7 +249,7 @@ function generateTable(tableId, operation) {
         });
     });
 
-    
+
 }
 
 
@@ -280,7 +280,6 @@ function startQuiz() {
     startCustomError.textContent = '';
 
     shuffle(questions);
-
     currentQuestionIndex = 0;
     currentAnswer = '';
     isFeedbackVisible = false;

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .custom-keyboard {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background: blue;
+            height:100px;
+            margin-bottom: max(10px, env(safe-area-inset-bottom));
+        }
+
+    </style>
+</head>
+<body>
+    <h2>header</h2>
+    <footer class="custom-keyboard"></footer>
+</body>
