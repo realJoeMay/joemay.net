@@ -183,7 +183,7 @@ th {
 
 .quiz-page {
     flex-direction: column;
-    min-height: calc(100vh);
+    /* min-height: calc(100vh); */
     margin: 0 auto;
     padding: 0;
     max-width: 800px;
@@ -195,11 +195,13 @@ th {
 /* PROBLEM CARD */
 
 .problem-card-wrap {
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    position: fixed;
+    top: calc(50vh - 80px);
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
-    position: relative;
-    top: -60px;
 }
 
 .problem-card {
@@ -229,8 +231,8 @@ th {
 /* NUMBER BUTTONS */
 
 .number-btns {
-    /* position: absolute;
-    bottom: 0; */
+    position: fixed;
+    bottom: 0;
     width: 100%;
     padding: 0 5px 5px;    
     display: grid;
@@ -239,12 +241,6 @@ th {
         "b7 b8 b9 b0 bc bc";
     gap: 5px;
     height: 120px;
-
-    /* Old Safari syntax */
-    /* padding-bottom: constant(safe-area-inset-bottom); */
-    /* New Safari / modern syntax */
-    /* padding-bottom: env(safe-area-inset-bottom); */
-
 }
 
 .number-btns button {
