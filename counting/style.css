@@ -57,7 +57,7 @@ body > * {
 }
 
 body.active-page-quiz {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 
@@ -189,8 +189,6 @@ th {
     max-width: 800px;
     justify-content: space-between;
     position: relative;
-    /* top: 50px; */
-
 }
 
 
@@ -231,8 +229,8 @@ th {
 /* NUMBER BUTTONS */
 
 .number-btns {
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
     width: 100%;
     padding: 0 5px 5px;    
     display: grid;
@@ -243,9 +241,9 @@ th {
     height: 120px;
 
     /* Old Safari syntax */
-    padding-bottom: constant(safe-area-inset-bottom);
+    /* padding-bottom: constant(safe-area-inset-bottom); */
     /* New Safari / modern syntax */
-    padding-bottom: env(safe-area-inset-bottom);
+    /* padding-bottom: env(safe-area-inset-bottom); */
 
 }
 
